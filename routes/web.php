@@ -23,6 +23,6 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 //create routes to categories
 Route::resource('/category', 'App\Http\Controllers\CategoryController');
 //create routes to article
-Route::resource('/category', 'App\Http\Controllers\ArticleController');
+Route::resource('/article', 'App\Http\Controllers\ArticleController');
 //create routes to comment
 Route::resource('/comment', 'App\Http\Controllers\CommentController');
