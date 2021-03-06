@@ -2070,6 +2070,10 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   data: function data() {
     return {
@@ -2153,36 +2157,20 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   data: function data() {
     return {
-      article: {
-        title: '',
-        short_article: '',
-        full_article: '',
-        user_id: '',
-        category_id: ''
-      }
+      article: []
     };
   },
-  methods: {
-    saveForm: function saveForm() {
-      event.preventDefault();
-      var app = this;
-      var newArticle = app.article;
-      axios.post('/article/store', newArticle).then(function (resp) {
-        app.$router.push({
-          path: '/'
-        });
-      })["catch"](function (resp) {
-        console.log(resp);
-        alert("Не могу добавить!");
-      });
-    }
+  mounted: function mounted() {
+    var app = this;
+    axios.get('/article/1').then(function (resp) {
+      app.article = resp.data;
+    })["catch"](function (resp) {
+      console.log(resp);
+      alert("Не могу загрузить");
+    });
   }
 });
 
@@ -2196,14 +2184,12 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _components_article_articleIndex__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./components/article/articleIndex.vue */ "./resources/js/components/article/articleIndex.vue");
 /* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm.js");
 /* harmony import */ var vue_router__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! vue-router */ "./node_modules/vue-router/dist/vue-router.esm.js");
-/* harmony import */ var _components_article_articleCreate_vue__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./components/article/articleCreate.vue */ "./resources/js/components/article/articleCreate.vue");
-/* harmony import */ var _components_article_articleEdit_vue__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./components/article/articleEdit.vue */ "./resources/js/components/article/articleEdit.vue");
-/* harmony import */ var _components_article_articleView_vue__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./components/article/articleView.vue */ "./resources/js/components/article/articleView.vue");
-
-
+/* harmony import */ var _components_article_articleIndex__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./components/article/articleIndex */ "./resources/js/components/article/articleIndex.vue");
+/* harmony import */ var _components_article_articleCreate__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./components/article/articleCreate */ "./resources/js/components/article/articleCreate.vue");
+/* harmony import */ var _components_article_articleEdit__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./components/article/articleEdit */ "./resources/js/components/article/articleEdit.vue");
+/* harmony import */ var _components_article_articleView__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./components/article/articleView */ "./resources/js/components/article/articleView.vue");
 __webpack_require__(/*! ./bootstrap */ "./resources/js/bootstrap.js");
 
 
@@ -2214,9 +2200,9 @@ __webpack_require__(/*! ./bootstrap */ "./resources/js/bootstrap.js");
 
 vue__WEBPACK_IMPORTED_MODULE_4__.default.use(vue_router__WEBPACK_IMPORTED_MODULE_5__.default);
 vue__WEBPACK_IMPORTED_MODULE_4__.default.component('article-index', _components_article_articleIndex__WEBPACK_IMPORTED_MODULE_0__.default);
-vue__WEBPACK_IMPORTED_MODULE_4__.default.component('article-create', _components_article_articleCreate_vue__WEBPACK_IMPORTED_MODULE_1__.default);
-vue__WEBPACK_IMPORTED_MODULE_4__.default.component('article-edit', _components_article_articleEdit_vue__WEBPACK_IMPORTED_MODULE_2__.default);
-vue__WEBPACK_IMPORTED_MODULE_4__.default.component('article-view', _components_article_articleView_vue__WEBPACK_IMPORTED_MODULE_3__.default);
+vue__WEBPACK_IMPORTED_MODULE_4__.default.component('article-create', _components_article_articleCreate__WEBPACK_IMPORTED_MODULE_1__.default);
+vue__WEBPACK_IMPORTED_MODULE_4__.default.component('article-edit', _components_article_articleEdit__WEBPACK_IMPORTED_MODULE_2__.default);
+vue__WEBPACK_IMPORTED_MODULE_4__.default.component('article-view', _components_article_articleView__WEBPACK_IMPORTED_MODULE_3__.default);
 var routes = [{
   path: '/',
   components: {
@@ -2224,15 +2210,15 @@ var routes = [{
   }
 }, {
   path: '/article/create',
-  component: _components_article_articleCreate_vue__WEBPACK_IMPORTED_MODULE_1__.default,
+  component: _components_article_articleCreate__WEBPACK_IMPORTED_MODULE_1__.default,
   name: 'articleCreate'
 }, {
   path: '/article/edit/:id',
-  component: _components_article_articleEdit_vue__WEBPACK_IMPORTED_MODULE_2__.default,
+  component: _components_article_articleEdit__WEBPACK_IMPORTED_MODULE_2__.default,
   name: 'articleEdit'
 }, {
   path: '/article/:id',
-  component: _components_article_articleEdit_vue__WEBPACK_IMPORTED_MODULE_2__.default,
+  component: _components_article_articleView__WEBPACK_IMPORTED_MODULE_3__.default,
   name: 'articleView'
 }];
 var router = new vue_router__WEBPACK_IMPORTED_MODULE_5__.default({
@@ -38373,7 +38359,7 @@ var render = function() {
         _c(
           "router-link",
           {
-            staticClass: "btn btn-success",
+            staticClass: "btn btn-success btn-sm",
             attrs: { to: { name: "articleCreate" } }
           },
           [_vm._v("\n            Добавить новое сообщение\n        ")]
@@ -38405,7 +38391,7 @@ var render = function() {
                     _c(
                       "router-link",
                       {
-                        staticClass: "btn btn-xs btn-default",
+                        staticClass: "btn btn-xs btn-warning btn-sm",
                         attrs: {
                           to: {
                             name: "articleEdit",
@@ -38421,9 +38407,27 @@ var render = function() {
                     ),
                     _vm._v(" "),
                     _c(
+                      "router-link",
+                      {
+                        staticClass: "btn btn-xs btn-info btn-sm",
+                        attrs: {
+                          to: {
+                            name: "articleView",
+                            params: { id: article.id }
+                          }
+                        }
+                      },
+                      [
+                        _vm._v(
+                          "\n                            Просмотр\n                        "
+                        )
+                      ]
+                    ),
+                    _vm._v(" "),
+                    _c(
                       "a",
                       {
-                        staticClass: "btn btn-xs btn-danger",
+                        staticClass: "btn btn-xs btn-danger btn-sm",
                         attrs: { href: "#" },
                         on: {
                           click: function($event) {
@@ -38489,163 +38493,70 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", [
-    _c(
-      "div",
-      { staticClass: "form-group" },
-      [
-        _c(
-          "router-link",
-          { staticClass: "btn btn-default", attrs: { to: "/" } },
-          [_vm._v("Back")]
-        )
-      ],
-      1
-    ),
+  return _c("div", { staticClass: "panel panel-default" }, [
+    _c("div", { staticClass: "panel-heading" }, [
+      _vm._v(_vm._s(_vm.article.title))
+    ]),
     _vm._v(" "),
-    _c("div", { staticClass: "panel panel-default" }, [
-      _c("div", { staticClass: "panel-heading" }, [
-        _vm._v("Добавить сообщение")
-      ]),
-      _vm._v(" "),
-      _c("div", { staticClass: "panel-body" }, [
-        _c(
-          "form",
-          {
-            on: {
-              submit: function($event) {
-                return _vm.saveForm()
-              }
-            }
-          },
-          [
-            _c("div", { staticClass: "row" }, [
-              _c("div", { staticClass: "col-xs-12 form-group" }, [
-                _c("label", { staticClass: "control-label" }, [
-                  _vm._v("Краткое описание")
-                ]),
-                _vm._v(" "),
-                _c("input", {
-                  directives: [
-                    {
-                      name: "model",
-                      rawName: "v-model",
-                      value: _vm.article.short_article,
-                      expression: "article.short_article"
-                    }
-                  ],
-                  staticClass: "form-control",
-                  attrs: { type: "text" },
-                  domProps: { value: _vm.article.short_article },
-                  on: {
-                    input: function($event) {
-                      if ($event.target.composing) {
-                        return
-                      }
-                      _vm.$set(
-                        _vm.article,
-                        "short_article",
-                        $event.target.value
-                      )
-                    }
-                  }
-                })
-              ])
-            ]),
+    _c("div", { staticClass: "panel-body" }, [
+      _c("table", { staticClass: "table table-bordered table-striped" }, [
+        _vm._m(0),
+        _vm._v(" "),
+        _c("tbody", [
+          _c("tr", [
+            _c("td", [_vm._v(_vm._s(_vm.article.title))]),
             _vm._v(" "),
-            _c("div", { staticClass: "row" }, [
-              _c("div", { staticClass: "col-xs-12 form-group" }, [
-                _c("label", { staticClass: "control-label" }, [
-                  _vm._v("Сообщение")
-                ]),
-                _vm._v(" "),
-                _c("input", {
-                  directives: [
-                    {
-                      name: "model",
-                      rawName: "v-model",
-                      value: _vm.article.full_article,
-                      expression: "article.full_article"
-                    }
-                  ],
-                  staticClass: "form-control",
-                  attrs: { type: "text" },
-                  domProps: { value: _vm.article.full_article },
-                  on: {
-                    input: function($event) {
-                      if ($event.target.composing) {
-                        return
-                      }
-                      _vm.$set(_vm.article, "full_article", $event.target.value)
-                    }
-                  }
-                })
-              ])
-            ]),
+            _c("td", [_vm._v(_vm._s(_vm.article.short_article))]),
             _vm._v(" "),
-            _c("div", { staticClass: "row" }, [
-              _c("div", { staticClass: "col-xs-12 form-group" }, [
-                _c("label", { staticClass: "control-label" }, [
-                  _vm._v("Пользователь")
-                ]),
-                _vm._v(" "),
-                _c("input", {
-                  directives: [
-                    {
-                      name: "model",
-                      rawName: "v-model",
-                      value: _vm.article.user_id,
-                      expression: "article.user_id"
-                    }
-                  ],
-                  staticClass: "form-control",
-                  attrs: { type: "text" },
-                  domProps: { value: _vm.article.user_id },
-                  on: {
-                    input: function($event) {
-                      if ($event.target.composing) {
-                        return
-                      }
-                      _vm.$set(_vm.article, "user_id", $event.target.value)
-                    }
-                  }
-                })
-              ])
-            ]),
+            _c("td", [_vm._v(_vm._s(_vm.article.full_article))]),
             _vm._v(" "),
-            _c("div", { staticClass: "row" }, [
-              _c("div", { staticClass: "col-xs-12 form-group" }, [
-                _c("label", { staticClass: "control-label" }, [
-                  _vm._v("Категория")
-                ]),
-                _vm._v(" "),
-                _c("input", {
-                  directives: [
-                    {
-                      name: "model",
-                      rawName: "v-model",
-                      value: _vm.article.category_id,
-                      expression: "article.category_id"
-                    }
-                  ],
-                  staticClass: "form-control",
-                  attrs: { type: "text" },
-                  domProps: { value: _vm.article.category_id },
-                  on: {
-                    input: function($event) {
-                      if ($event.target.composing) {
-                        return
-                      }
-                      _vm.$set(_vm.article, "category_id", $event.target.value)
-                    }
-                  }
-                })
-              ])
-            ]),
+            _c("td", [_vm._v(_vm._s(_vm.article.user_id))]),
             _vm._v(" "),
-            _vm._m(0)
-          ]
-        )
+            _c("td", [_vm._v(_vm._s(_vm.article.category_id))]),
+            _vm._v(" "),
+            _c(
+              "td",
+              [
+                _c(
+                  "router-link",
+                  {
+                    staticClass: "btn btn-xs btn-warning btn-sm",
+                    attrs: {
+                      to: {
+                        name: "articleEdit",
+                        params: { id: _vm.article.id }
+                      }
+                    }
+                  },
+                  [
+                    _vm._v(
+                      "\n                        Редактировать\n                    "
+                    )
+                  ]
+                ),
+                _vm._v(" "),
+                _c(
+                  "a",
+                  {
+                    staticClass: "btn btn-xs btn-danger btn-sm",
+                    attrs: { href: "#" },
+                    on: {
+                      click: function($event) {
+                        return _vm.deleteEntry(_vm.article.id, _vm.index)
+                      }
+                    }
+                  },
+                  [
+                    _vm._v(
+                      "\n                        Удалить\n                    "
+                    )
+                  ]
+                )
+              ],
+              1
+            )
+          ])
+        ])
       ])
     ])
   ])
@@ -38655,9 +38566,19 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "row" }, [
-      _c("div", { staticClass: "col-xs-12 form-group" }, [
-        _c("button", { staticClass: "btn btn-success" }, [_vm._v("Create")])
+    return _c("thead", [
+      _c("tr", [
+        _c("th", [_vm._v("Заголовок")]),
+        _vm._v(" "),
+        _c("th", [_vm._v("Краткое описание")]),
+        _vm._v(" "),
+        _c("th", [_vm._v("Сообщение")]),
+        _vm._v(" "),
+        _c("th", [_vm._v("Пользователь")]),
+        _vm._v(" "),
+        _c("th", [_vm._v("Категория")]),
+        _vm._v(" "),
+        _c("th", { attrs: { width: "100" } }, [_vm._v(" ")])
       ])
     ])
   }

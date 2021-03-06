@@ -1,7 +1,7 @@
 <template>
     <div>
         <div class="form-group">
-            <router-link :to="{name: 'articleCreate'}" class="btn btn-success">
+            <router-link :to="{name: 'articleCreate'}" class="btn btn-success btn-sm">
                 Добавить новое сообщение
             </router-link>
         </div>
@@ -25,11 +25,15 @@
                         <td>{{ article.user_id }}</td>
                         <td>
                             <router-link :to="{name: 'articleEdit', params: {id: article.id}}"
-                                         class="btn btn-xs btn-default">
+                                         class="btn btn-xs btn-warning btn-sm">
                                 Редактировать
                             </router-link>
+                            <router-link :to="{name: 'articleView', params: {id: article.id}}"
+                                         class="btn btn-xs btn-info btn-sm">
+                                Просмотр
+                            </router-link>
                             <a href="#"
-                               class="btn btn-xs btn-danger"
+                               class="btn btn-xs btn-danger btn-sm"
                                v-on:click="deleteEntry(article.id, index)">
                                 Удалить
                             </a>
@@ -50,7 +54,7 @@ export default {
         }
     },
     mounted() {
-        var app = this;
+        const app = this;
         axios.get('/article')
             .then(function (resp) {
                 app.articles = resp.data;
@@ -63,7 +67,7 @@ export default {
     methods: {
         deleteEntry(id, index) {
             if (confirm("Хотите удалить?")) {
-                var app = this;
+                const app = this;
                 axios.delete('/article/' + id)
                     .then(function (resp) {
                         app.articles.splice(index, 1);

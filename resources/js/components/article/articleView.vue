@@ -1,75 +1,62 @@
 <template>
-    <div>
-        <div class="form-group">
-            <router-link to="/" class="btn btn-default">Back</router-link>
-        </div>
-
-        <div class="panel panel-default">
-            <div class="panel-heading">Добавить сообщение</div>
-            <div class="panel-body">
-                <form v-on:submit="saveForm()">
-                    <div class="row">
-                        <div class="col-xs-12 form-group">
-                            <label class="control-label">Краткое описание</label>
-                            <input type="text" v-model="article.short_article" class="form-control">
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-xs-12 form-group">
-                            <label class="control-label">Сообщение</label>
-                            <input type="text" v-model="article.full_article" class="form-control">
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-xs-12 form-group">
-                            <label class="control-label">Пользователь</label>
-                            <input type="text" v-model="article.user_id" class="form-control">
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-xs-12 form-group">
-                            <label class="control-label">Категория</label>
-                            <input type="text" v-model="article.category_id" class="form-control">
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-xs-12 form-group">
-                            <button class="btn btn-success">Create</button>
-                        </div>
-                    </div>
-                </form>
-            </div>
+    <div class="panel panel-default">
+        <div class="panel-heading">{{ article.title }}</div>
+        <div class="panel-body">
+            <table class="table table-bordered table-striped">
+                <thead>
+                <tr>
+                    <th>Заголовок</th>
+                    <th>Краткое описание</th>
+                    <th>Сообщение</th>
+                    <th>Пользователь</th>
+                    <th>Категория</th>
+                    <th width="100">&nbsp;</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <td>{{ article.title }}</td>
+                    <td>{{ article.short_article }}</td>
+                    <td>{{ article.full_article }}</td>
+                    <td>{{ article.user_id }}</td>
+                    <td>{{ article.category_id }}</td>
+                    <td>
+                        <router-link :to="{name: 'articleEdit', params: {id: article.id}}"
+                                     class="btn btn-xs btn-warning btn-sm">
+                            Редактировать
+                        </router-link>
+                        <a href="#"
+                           class="btn btn-xs btn-danger btn-sm"
+                           v-on:click="deleteEntry(article.id, index)">
+                            Удалить
+                        </a>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
         </div>
     </div>
+
 </template>
 
 <script>
 export default {
     data: function () {
         return {
-            article: {
-                title: '',
-                short_article: '',
-                full_article: '',
-                user_id: '',
-                category_id: '',
-            }
+            article: []
         }
     },
-    methods: {
-        saveForm() {
-            event.preventDefault();
-            var app = this;
-            var newArticle = app.article;
-            axios.post('/article/store', newArticle)
-                .then(function (resp) {
-                    app.$router.push({path: '/'});
-                })
-                .catch(function (resp) {
-                    console.log(resp);
-                    alert("Не могу добавить!");
-                });
-        }
-    }
+    mounted() {
+        var app = this;
+        axios.get('/article/1')
+            .then(function (resp) {
+                app.article = resp.data;
+            })
+            .catch(function (resp) {
+                console.log(resp);
+                alert("Не могу загрузить");
+            });
+    },
+
 }
 </script>

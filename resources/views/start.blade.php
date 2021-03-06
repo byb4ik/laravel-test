@@ -13,6 +13,7 @@
 <div class="container">
     <div id="app">
         <article-index></article-index>
+        <article-view></article-view>
     </div>
 </div>
 
@@ -20,12 +21,3 @@
 </body>
 </html>
 
-{{--<script>--}}
-{{--    import ArticleIndex from "../js/components/article/articleIndex";--}}
-{{--    import ArticleCreate from "../js/components/article/articleCreate";--}}
-{{--    import ArticleEdit from "../js/components/article/articleEdit";--}}
-
-{{--    export default {--}}
-{{--        components: {ArticleIndex, ArticleCreate, ArticleEdit},--}}
-{{--    }--}}
-{{--</script>--}}

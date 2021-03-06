@@ -1,20 +1,18 @@
-import articleIndex from "./components/article/articleIndex";
-
 require('./bootstrap');
 
 import Vue from 'vue';
 import VueRouter from 'vue-router';
 
-import ArticleIndex from './components/article/articleIndex.vue';
-import ArticleCreate from './components/article/articleCreate.vue';
-import ArticleEdit from './components/article/articleEdit.vue';
-import ArticleView from './components/article/articleView.vue';
+import articleIndex from "./components/article/articleIndex";
+import articleCreate from './components/article/articleCreate';
+import articleEdit from './components/article/articleEdit';
+import articleView from './components/article/articleView';
 
 Vue.use(VueRouter);
-Vue.component('article-index', ArticleIndex);
-Vue.component('article-create', ArticleCreate);
-Vue.component('article-edit', ArticleEdit);
-Vue.component('article-view', ArticleView);
+Vue.component('article-index', articleIndex);
+Vue.component('article-create', articleCreate);
+Vue.component('article-edit', articleEdit);
+Vue.component('article-view', articleView);
 
 
 const routes = [
@@ -24,9 +22,9 @@ const routes = [
             articleIndex: articleIndex
         }
     },
-    {path: '/article/create', component: ArticleCreate, name: 'articleCreate'},
-    {path: '/article/edit/:id', component: ArticleEdit, name: 'articleEdit'},
-    {path: '/article/:id', component: ArticleEdit, name: 'articleView'},
+    {path: '/article/create', component: articleCreate, name: 'articleCreate'},
+    {path: '/article/edit/:id', component: articleEdit, name: 'articleEdit'},
+    {path: '/article/:id', component: articleView, name: 'articleView'},
 ]
 
 const router = new VueRouter({ routes })
