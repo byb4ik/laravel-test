@@ -1,40 +1,40 @@
 <template>
     <div>
         <div class="form-group">
-            <router-link to="/" class="btn btn-default">Back</router-link>
+            <router-link to="/" class="btn btn-default">Назад</router-link>
         </div>
 
         <div class="panel panel-default">
-            <div class="panel-heading">Create new company</div>
+            <div class="panel-heading">Добавить сообщение</div>
             <div class="panel-body">
                 <form v-on:submit="saveForm()">
                     <div class="row">
                         <div class="col-xs-12 form-group">
-                            <label class="control-label">Company name</label>
-                            <input type="text" v-model="company.name" class="form-control">
+                            <label class="control-label">Краткое описание</label>
+                            <input type="text" v-model="article.short_article" class="form-control">
                         </div>
                     </div>
                     <div class="row">
                         <div class="col-xs-12 form-group">
-                            <label class="control-label">Company address</label>
-                            <input type="text" v-model="company.address" class="form-control">
+                            <label class="control-label">Сообщение</label>
+                            <input type="text" v-model="article.full_article" class="form-control">
                         </div>
                     </div>
                     <div class="row">
                         <div class="col-xs-12 form-group">
-                            <label class="control-label">Company website</label>
-                            <input type="text" v-model="company.website" class="form-control">
+                            <label class="control-label">Пользователь</label>
+                            <input type="text" v-model="article.user_id" class="form-control">
                         </div>
                     </div>
                     <div class="row">
                         <div class="col-xs-12 form-group">
-                            <label class="control-label">Company email</label>
-                            <input type="text" v-model="company.email" class="form-control">
+                            <label class="control-label">Категория</label>
+                            <input type="text" v-model="article.category_id" class="form-control">
                         </div>
                     </div>
                     <div class="row">
                         <div class="col-xs-12 form-group">
-                            <button class="btn btn-success">Create</button>
+                            <button class="btn btn-success">Добавить</button>
                         </div>
                     </div>
                 </form>
@@ -47,23 +47,23 @@ export default {
     mounted() {
         let app = this;
         let id = app.$route.params.id;
-        app.companyId = id;
+        app.articleIndex = id;
         axios.get('/article/' + id)
             .then(function (resp) {
-                app.company = resp.data;
+                app.article = resp.data;
             })
             .catch(function () {
-                alert("Could not load your company")
+                alert("Не могу добавить сообщение!")
             });
     },
     data: function () {
         return {
-            companyId: null,
-            company: {
-                name: '',
-                address: '',
-                website: '',
-                email: '',
+            articleIndex: null,
+            article: {
+                short_article: '',
+                full_article: '',
+                user_id: '',
+                category_id: '',
             }
         }
     },
@@ -71,14 +71,14 @@ export default {
         saveForm() {
             event.preventDefault();
             var app = this;
-            var newCompany = app.company;
-            axios.patch('/article/' + app.companyId, newCompany)
+            var newArticle = app.article;
+            axios.patch('/article/' + app.articleIndex, newArticle)
                 .then(function (resp) {
                     app.$router.replace('/');
                 })
                 .catch(function (resp) {
                     console.log(resp);
-                    alert("Could not create your company");
+                    alert("Не могу отредактировать");
                 });
         }
     }

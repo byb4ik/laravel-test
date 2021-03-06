@@ -17,7 +17,7 @@ Route::get('/', function () {
     return view('start');
 });
 
-//Auth::routes();
+Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 //create routes to categories
