@@ -1,7 +1,7 @@
 <template>
     <div>
         <div class="form-group">
-            <router-link :to="{name: 'createCompany'}" class="btn btn-success">Create new company</router-link>
+            <router-link :to="{name: 'createArticle'}" class="btn btn-success">Create new article</router-link>
         </div>
 
         <div class="panel panel-default">
@@ -18,22 +18,22 @@
                     </tr>
                     </thead>
                     <tbody>
-                    <tr v-for="company, index in companies">
-                        <td>{{ company.name }}</td>
-                        <td>{{ company.address }}</td>
-                        <td>{{ company.website }}</td>
-                        <td>{{ company.email }}</td>
-                        <td>
-                            <router-link :to="{name: 'editCompany', params: {id: company.id}}" class="btn btn-xs btn-default">
-                                Edit
-                            </router-link>
-                            <a href="#"
-                               class="btn btn-xs btn-danger"
-                               v-on:click="deleteEntry(company.id, index)">
-                                Delete
-                            </a>
-                        </td>
-                    </tr>
+<!--                    <tr v-for="company, index in articles">-->
+<!--                        <td>{{ articles.name }}</td>-->
+<!--                        <td>{{ articles.address }}</td>-->
+<!--                        <td>{{ articles.website }}</td>-->
+<!--                        <td>{{ articles.email }}</td>-->
+<!--                        <td>-->
+<!--                            <router-link :to="{name: 'editCompany', params: {id: company.id}}" class="btn btn-xs btn-default">-->
+<!--                                Edit-->
+<!--                            </router-link>-->
+<!--                            <a href="#"-->
+<!--                               class="btn btn-xs btn-danger"-->
+<!--                               v-on:click="deleteEntry(company.id, index)">-->
+<!--                                Delete-->
+<!--                            </a>-->
+<!--                        </td>-->
+<!--                    </tr>-->
                     </tbody>
                 </table>
             </div>
@@ -45,14 +45,14 @@
 export default {
     data: function () {
         return {
-            companies: []
+            articles: []
         }
     },
     mounted() {
         var app = this;
         axios.get('/article')
             .then(function (resp) {
-                app.companies = resp.data;
+                app.articles = resp.data;
             })
             .catch(function (resp) {
                 console.log(resp);
@@ -65,7 +65,7 @@ export default {
                 var app = this;
                 axios.delete('/article/' + id)
                     .then(function (resp) {
-                        app.companies.splice(index, 1);
+                        app.articles.splice(index, 1);
                     })
                     .catch(function (resp) {
                         alert("Could not delete company");

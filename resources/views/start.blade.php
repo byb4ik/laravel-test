@@ -10,7 +10,7 @@
 </head>
 <body>
 <div id="app">
-    <example-component></example-component>
+    <article-index></article-index>
 </div>
 
 <script src="./js/app.js"></script>

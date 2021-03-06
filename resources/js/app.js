@@ -1,23 +1,28 @@
-window.Vue = require('vue');
-import VueRouter from 'vue-router';
+// window.Vue = require('vue');
+//
+// import VueRouter from 'vue-router';
+//
+// window.Vue.use(VueRouter);
+import Vue from 'vue'
+import VueRouter from 'vue-router'
 
-window.Vue.use(VueRouter);
+Vue.use(VueRouter)
 
-import CompaniesIndex from './components/article/CompaniesIndex.vue';
-import CompaniesCreate from './components/article/CompaniesCreate.vue';
-import CompaniesEdit from './components/article/CompaniesEdit.vue';
+import ArticleIndex from './components/article/articleIndex.vue';
+import ArticleCreate from './components/article/articleCreate.vue';
+import ArticleEdit from './components/article/articleEdit.vue';
 
 const routes = [
     {
         path: '/',
         components: {
-            companiesIndex: CompaniesIndex
+            articleIndex: ArticleIndex
         }
     },
-    {path: '/admin/companies/create', component: CompaniesCreate, name: 'createCompany'},
-    {path: '/admin/companies/edit/:id', component: CompaniesEdit, name: 'editCompany'},
+    {path: '/article/create', component: ArticleCreate, name: 'createArticle'},
+    {path: '/article/edit/:id', component: ArticleEdit, name: 'editArticle'},
 ]
 
-const router = new VueRouter({ routes })
+const router = new VueRouter({routes})
 
-const app = new Vue({ router }).$mount('#app')
+const app = new Vue({router}).$mount('#app')
