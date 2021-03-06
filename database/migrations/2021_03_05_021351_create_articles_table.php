@@ -15,12 +15,12 @@ class CreateArticlesTable extends Migration
     {
         Schema::create('articles', function (Blueprint $table) {
             $table->id();
-            $table->text('short_article');
+            $table->string('short_article', 300);
             $table->longText('full_article');
-            $table->integer('category_id');
+            $table->integer('category_id')->nullable();
             $table->integer('user_id');
-            $table->integer('comment_id');
-            $table->text('rating');
+            $table->integer('comment_id')->nullable();
+            $table->text('rating')->nullable();
             $table->timestamps();
         });
     }

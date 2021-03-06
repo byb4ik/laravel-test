@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Article;
 use Illuminate\Http\Request;
 
 class ArticleController extends Controller
@@ -13,17 +14,7 @@ class ArticleController extends Controller
      */
     public function index()
     {
-        //
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
+        return Article::all();
     }
 
     /**
@@ -34,7 +25,8 @@ class ArticleController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $article = Article::create($request->all());
+        return $article;
     }
 
     /**
@@ -45,18 +37,7 @@ class ArticleController extends Controller
      */
     public function show($id)
     {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
+        return Article::findOrFail($id);
     }
 
     /**
@@ -68,7 +49,10 @@ class ArticleController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $article = Article::findOrFail($id);
+        $article->update($request->all());
+
+        return $article;
     }
 
     /**
@@ -79,6 +63,9 @@ class ArticleController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $article = Article::findOrFile($id);
+        $article->delete();
+
+        return '';
     }
 }

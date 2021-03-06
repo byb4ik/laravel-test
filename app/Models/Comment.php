@@ -14,4 +14,19 @@ class Comment extends Model
      * @var string
      */
     protected $table = 'comments';
+
+    /**
+     * @var array
+     */
+    protected $fillable = [
+        'comment',
+    ];
+
+    /**
+     * @var array
+     */
+    protected $hidden = [
+        'created_at',
+        'updated_at'
+    ];
 }

@@ -14,4 +14,24 @@ class Article extends Model
      * @var string
      */
     protected $table = 'articles';
+
+    /**
+     * @var array
+     */
+    protected $fillable = [
+        'short_article',
+        'full_article',
+        'category_id',
+        'user_id',
+        'comment_id',
+        'rating',
+    ];
+
+    /**
+     * @var array
+     */
+    protected $hidden = [
+        'created_at',
+        'updated_at',
+    ];
 }

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Comment;
 use Illuminate\Http\Request;
 
 class CommentController extends Controller
@@ -13,17 +14,7 @@ class CommentController extends Controller
      */
     public function index()
     {
-        //
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
+        return Comment::all();
     }
 
     /**
@@ -45,7 +36,7 @@ class CommentController extends Controller
      */
     public function show($id)
     {
-        //
+        return Comment::findOrFail($id);
     }
 
     /**
