@@ -1,7 +1,7 @@
 <template>
     <div>
         <div class="form-group">
-            <router-link to="/" class="btn btn-default">Back</router-link>
+            <router-link to="/" class="btn btn-primary">Back</router-link>
         </div>
 
         <div class="panel panel-default">
@@ -9,31 +9,37 @@
             <div class="panel-body">
                 <form v-on:submit="saveForm()">
                     <div class="row">
-                        <div class="col-xs-12 form-group">
+                        <div class="col-12">
+                            <label class="control-label">Заголовок</label>
+                            <input type="text" v-model="article.title" class="form-control">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-12">
                             <label class="control-label">Краткое описание</label>
                             <input type="text" v-model="article.short_article" class="form-control">
                         </div>
                     </div>
                     <div class="row">
-                        <div class="col-xs-12 form-group">
+                        <div class="col-12">
                             <label class="control-label">Сообщение</label>
                             <input type="text" v-model="article.full_article" class="form-control">
                         </div>
                     </div>
                     <div class="row">
-                        <div class="col-xs-12 form-group">
+                        <div class="col-12">
                             <label class="control-label">Пользователь</label>
                             <input type="text" v-model="article.user_id" class="form-control">
                         </div>
                     </div>
                     <div class="row">
-                        <div class="col-xs-12 form-group">
+                        <div class="col-12">
                             <label class="control-label">Категория</label>
                             <input type="text" v-model="article.category_id" class="form-control">
                         </div>
                     </div>
                     <div class="row">
-                        <div class="col-xs-12 form-group">
+                        <div class="col-12">
                             <button class="btn btn-success">Create</button>
                         </div>
                     </div>
@@ -59,9 +65,9 @@ export default {
     methods: {
         saveForm() {
             event.preventDefault();
-            var app = this;
-            var newArticle = app.article;
-            axios.post('/article/store', newArticle)
+            let app = this;
+            let newArticle = app.article;
+            axios.post('/article', newArticle)
                 .then(function (resp) {
                     app.$router.push({path: '/'});
                 })

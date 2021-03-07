@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div class="row">
         <div class="form-group">
             <router-link :to="{name: 'articleCreate'}" class="btn btn-success btn-sm">
                 Добавить новое сообщение
@@ -15,6 +15,7 @@
                         <th>Заголовок</th>
                         <th>Краткое описание</th>
                         <th>Пользователь</th>
+                        <th>Категория</th>
                         <th width="100">&nbsp;</th>
                     </tr>
                     </thead>
@@ -23,6 +24,8 @@
                         <td>{{ article.title }}</td>
                         <td>{{ article.short_article }}</td>
                         <td>{{ article.user_id }}</td>
+                        <td>{{ article.category_id }}</td>
+
                         <td>
                             <router-link :to="{name: 'articleEdit', params: {id: article.id}}"
                                          class="btn btn-xs btn-warning btn-sm">
@@ -55,7 +58,7 @@ export default {
     },
     mounted() {
         const app = this;
-        axios.get('/article')
+        axios.get('/article/')
             .then(function (resp) {
                 app.articles = resp.data;
             })

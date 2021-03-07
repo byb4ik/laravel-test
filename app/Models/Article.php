@@ -34,4 +34,21 @@ class Article extends Model
         'created_at',
         'updated_at',
     ];
+
+    /**
+     * get Category's
+     * @return \Illuminate\Database\Eloquent\Relations\HasOne
+     */
+    public function category()
+    {
+        return $this->hasOne(Category::class, 'id', 'category_id');
+    }
+
+    /**
+     * get User's
+     * @return \Illuminate\Database\Eloquent\Relations\HasOne
+     */
+    public function user(){
+        return $this->hasOne(User::class, 'id','user_id');
+    }
 }

@@ -1890,6 +1890,12 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   data: function data() {
     return {
@@ -1907,7 +1913,7 @@ __webpack_require__.r(__webpack_exports__);
       event.preventDefault();
       var app = this;
       var newArticle = app.article;
-      axios.post('/article/store', newArticle).then(function (resp) {
+      axios.post('/article', newArticle).then(function (resp) {
         app.$router.push({
           path: '/'
         });
@@ -1980,7 +1986,6 @@ __webpack_require__.r(__webpack_exports__);
   mounted: function mounted() {
     var app = this;
     var id = app.$route.params.id;
-    app.articleIndex = id;
     axios.get('/article/' + id).then(function (resp) {
       app.article = resp.data;
     })["catch"](function () {
@@ -2003,7 +2008,7 @@ __webpack_require__.r(__webpack_exports__);
       event.preventDefault();
       var app = this;
       var newArticle = app.article;
-      axios.patch('/article/' + app.articleIndex, newArticle).then(function (resp) {
+      axios.put('/article/' + app.articleIndex, newArticle).then(function (resp) {
         app.$router.replace('/');
       })["catch"](function (resp) {
         console.log(resp);
@@ -2074,6 +2079,9 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   data: function data() {
     return {
@@ -2082,7 +2090,7 @@ __webpack_require__.r(__webpack_exports__);
   },
   mounted: function mounted() {
     var app = this;
-    axios.get('/article').then(function (resp) {
+    axios.get('/article/').then(function (resp) {
       app.articles = resp.data;
     })["catch"](function (resp) {
       console.log(resp);
@@ -2157,6 +2165,12 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   data: function data() {
     return {
@@ -2165,7 +2179,9 @@ __webpack_require__.r(__webpack_exports__);
   },
   mounted: function mounted() {
     var app = this;
-    axios.get('/article/1').then(function (resp) {
+    var id = app.$route.params.id;
+    console.log(id);
+    axios.get('/article/' + id).then(function (resp) {
       app.article = resp.data;
     })["catch"](function (resp) {
       console.log(resp);
@@ -2209,7 +2225,7 @@ var routes = [{
     articleIndex: _components_article_articleIndex__WEBPACK_IMPORTED_MODULE_0__.default
   }
 }, {
-  path: '/article/create',
+  path: '/article/store',
   component: _components_article_articleCreate__WEBPACK_IMPORTED_MODULE_1__.default,
   name: 'articleCreate'
 }, {
@@ -37968,7 +37984,7 @@ var render = function() {
       [
         _c(
           "router-link",
-          { staticClass: "btn btn-default", attrs: { to: "/" } },
+          { staticClass: "btn btn-primary", attrs: { to: "/" } },
           [_vm._v("Back")]
         )
       ],
@@ -37992,7 +38008,37 @@ var render = function() {
           },
           [
             _c("div", { staticClass: "row" }, [
-              _c("div", { staticClass: "col-xs-12 form-group" }, [
+              _c("div", { staticClass: "col-12" }, [
+                _c("label", { staticClass: "control-label" }, [
+                  _vm._v("Заголовок")
+                ]),
+                _vm._v(" "),
+                _c("input", {
+                  directives: [
+                    {
+                      name: "model",
+                      rawName: "v-model",
+                      value: _vm.article.title,
+                      expression: "article.title"
+                    }
+                  ],
+                  staticClass: "form-control",
+                  attrs: { type: "text" },
+                  domProps: { value: _vm.article.title },
+                  on: {
+                    input: function($event) {
+                      if ($event.target.composing) {
+                        return
+                      }
+                      _vm.$set(_vm.article, "title", $event.target.value)
+                    }
+                  }
+                })
+              ])
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "row" }, [
+              _c("div", { staticClass: "col-12" }, [
                 _c("label", { staticClass: "control-label" }, [
                   _vm._v("Краткое описание")
                 ]),
@@ -38026,7 +38072,7 @@ var render = function() {
             ]),
             _vm._v(" "),
             _c("div", { staticClass: "row" }, [
-              _c("div", { staticClass: "col-xs-12 form-group" }, [
+              _c("div", { staticClass: "col-12" }, [
                 _c("label", { staticClass: "control-label" }, [
                   _vm._v("Сообщение")
                 ]),
@@ -38056,7 +38102,7 @@ var render = function() {
             ]),
             _vm._v(" "),
             _c("div", { staticClass: "row" }, [
-              _c("div", { staticClass: "col-xs-12 form-group" }, [
+              _c("div", { staticClass: "col-12" }, [
                 _c("label", { staticClass: "control-label" }, [
                   _vm._v("Пользователь")
                 ]),
@@ -38086,7 +38132,7 @@ var render = function() {
             ]),
             _vm._v(" "),
             _c("div", { staticClass: "row" }, [
-              _c("div", { staticClass: "col-xs-12 form-group" }, [
+              _c("div", { staticClass: "col-12" }, [
                 _c("label", { staticClass: "control-label" }, [
                   _vm._v("Категория")
                 ]),
@@ -38128,7 +38174,7 @@ var staticRenderFns = [
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
     return _c("div", { staticClass: "row" }, [
-      _c("div", { staticClass: "col-xs-12 form-group" }, [
+      _c("div", { staticClass: "col-12" }, [
         _c("button", { staticClass: "btn btn-success" }, [_vm._v("Create")])
       ])
     ])
@@ -38163,7 +38209,7 @@ var render = function() {
       [
         _c(
           "router-link",
-          { staticClass: "btn btn-default", attrs: { to: "/" } },
+          { staticClass: "btn btn-primary", attrs: { to: "/" } },
           [_vm._v("Назад")]
         )
       ],
@@ -38187,7 +38233,7 @@ var render = function() {
           },
           [
             _c("div", { staticClass: "row" }, [
-              _c("div", { staticClass: "col-xs-12 form-group" }, [
+              _c("div", { staticClass: "col-12" }, [
                 _c("label", { staticClass: "control-label" }, [
                   _vm._v("Краткое описание")
                 ]),
@@ -38221,7 +38267,7 @@ var render = function() {
             ]),
             _vm._v(" "),
             _c("div", { staticClass: "row" }, [
-              _c("div", { staticClass: "col-xs-12 form-group" }, [
+              _c("div", { staticClass: "col-12" }, [
                 _c("label", { staticClass: "control-label" }, [
                   _vm._v("Сообщение")
                 ]),
@@ -38251,7 +38297,7 @@ var render = function() {
             ]),
             _vm._v(" "),
             _c("div", { staticClass: "row" }, [
-              _c("div", { staticClass: "col-xs-12 form-group" }, [
+              _c("div", { staticClass: "col-5" }, [
                 _c("label", { staticClass: "control-label" }, [
                   _vm._v("Пользователь")
                 ]),
@@ -38281,7 +38327,7 @@ var render = function() {
             ]),
             _vm._v(" "),
             _c("div", { staticClass: "row" }, [
-              _c("div", { staticClass: "col-xs-12 form-group" }, [
+              _c("div", { staticClass: "col-5" }, [
                 _c("label", { staticClass: "control-label" }, [
                   _vm._v("Категория")
                 ]),
@@ -38351,7 +38397,7 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", [
+  return _c("div", { staticClass: "row" }, [
     _c(
       "div",
       { staticClass: "form-group" },
@@ -38384,6 +38430,8 @@ var render = function() {
                 _c("td", [_vm._v(_vm._s(article.short_article))]),
                 _vm._v(" "),
                 _c("td", [_vm._v(_vm._s(article.user_id))]),
+                _vm._v(" "),
+                _c("td", [_vm._v(_vm._s(article.category_id))]),
                 _vm._v(" "),
                 _c(
                   "td",
@@ -38466,6 +38514,8 @@ var staticRenderFns = [
         _vm._v(" "),
         _c("th", [_vm._v("Пользователь")]),
         _vm._v(" "),
+        _c("th", [_vm._v("Категория")]),
+        _vm._v(" "),
         _c("th", { attrs: { width: "100" } }, [_vm._v(" ")])
       ])
     ])
@@ -38494,6 +38544,19 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("div", { staticClass: "panel panel-default" }, [
+    _c(
+      "div",
+      { staticClass: "form-group" },
+      [
+        _c(
+          "router-link",
+          { staticClass: "btn btn-primary", attrs: { to: "/" } },
+          [_vm._v("Назад")]
+        )
+      ],
+      1
+    ),
+    _vm._v(" "),
     _c("div", { staticClass: "panel-heading" }, [
       _vm._v(_vm._s(_vm.article.title))
     ]),

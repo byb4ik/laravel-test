@@ -22,7 +22,7 @@ const routes = [
             articleIndex: articleIndex
         }
     },
-    {path: '/article/create', component: articleCreate, name: 'articleCreate'},
+    {path: '/article/store', component: articleCreate, name: 'articleCreate'},
     {path: '/article/edit/:id', component: articleEdit, name: 'articleEdit'},
     {path: '/article/:id', component: articleView, name: 'articleView'},
 ]

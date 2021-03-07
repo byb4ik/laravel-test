@@ -1,6 +1,12 @@
 <template>
     <div class="panel panel-default">
+
+        <div class="form-group">
+            <router-link to="/" class="btn btn-primary">Назад</router-link>
+        </div>
+
         <div class="panel-heading">{{ article.title }}</div>
+
         <div class="panel-body">
             <table class="table table-bordered table-striped">
                 <thead>
@@ -48,7 +54,9 @@ export default {
     },
     mounted() {
         var app = this;
-        axios.get('/article/1')
+        let id = app.$route.params.id;
+        console.log(id);
+        axios.get('/article/' + id)
             .then(function (resp) {
                 app.article = resp.data;
             })

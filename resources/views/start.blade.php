@@ -12,8 +12,9 @@
 <body>
 <div class="container">
     <div id="app">
-        <article-index></article-index>
-        <article-view></article-view>
+        <router-view name="articleIndex"></router-view>
+{{--        <article-view></article-view>--}}
+        <router-view></router-view>
     </div>
 </div>
 
