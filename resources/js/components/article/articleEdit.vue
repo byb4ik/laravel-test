@@ -5,36 +5,31 @@
         </div>
 
         <div class="panel panel-default">
-            <div class="panel-heading">Добавить сообщение</div>
+
             <div class="panel-body">
                 <form v-on:submit="saveForm()">
                     <div class="row">
                         <div class="col-12">
-                            <label class="control-label">Краткое описание</label>
-                            <input type="text" v-model="article.short_article" class="form-control">
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-12">
-                            <label class="control-label">Сообщение</label>
-                            <input type="text" v-model="article.full_article" class="form-control">
+                            <label class="control-label">Редактировать</label>
+                            <textarea v-model="article.full_article" class="form-control"></textarea>
                         </div>
                     </div>
                     <div class="row">
                         <div class="col-5">
                             <label class="control-label">Пользователь</label>
-                            <input type="text" v-model="article.user_id" class="form-control">
+                            <input type="text" v-model="article.user.name" class="form-control">
                         </div>
                     </div>
                     <div class="row">
                         <div class="col-5">
                             <label class="control-label">Категория</label>
-                            <input type="text" v-model="article.category_id" class="form-control">
+                            <input type="text" v-model="article.category.name" class="form-control">
                         </div>
                     </div>
+                    <br>
                     <div class="row">
                         <div class="col-xs-12 form-group">
-                            <button class="btn btn-success">Добавить</button>
+                            <button class="btn btn-success">Сохранить</button>
                         </div>
                     </div>
                 </form>

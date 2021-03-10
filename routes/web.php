@@ -26,3 +26,5 @@ Route::resource('/category', 'App\Http\Controllers\CategoryController');
 Route::resource('/article', 'App\Http\Controllers\ArticleController');
 //create routes to comment
 Route::resource('/comment', 'App\Http\Controllers\CommentController');
+
+Route::get('/article/{id}/{user_id}', 'App\Http\Controllers\ArticleController@addRate');

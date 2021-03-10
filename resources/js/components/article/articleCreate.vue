@@ -16,14 +16,8 @@
                     </div>
                     <div class="row">
                         <div class="col-12">
-                            <label class="control-label">Краткое описание</label>
-                            <input type="text" v-model="article.short_article" class="form-control">
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-12">
                             <label class="control-label">Сообщение</label>
-                            <input type="text" v-model="article.full_article" class="form-control">
+                            <textarea v-model="article.full_article" class="form-control"></textarea>
                         </div>
                     </div>
                     <div class="row">
@@ -37,7 +31,7 @@
                             <label class="control-label">Категория</label>
                             <input type="text" v-model="article.category_id" class="form-control">
                         </div>
-                    </div>
+                    </div><br>
                     <div class="row">
                         <div class="col-12">
                             <button class="btn btn-success">Create</button>

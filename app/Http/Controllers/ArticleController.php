@@ -14,7 +14,8 @@ class ArticleController extends Controller
      */
     public function index()
     {
-        $articles = Article::all();
+        $articles = Article::with('user', 'category')
+            ->get();
 
         return $articles;
     }
@@ -39,11 +40,11 @@ class ArticleController extends Controller
      */
     public function show($id)
     {
-        $article = Article::findOrFail($id);
-        $article->category_id = $article->category->name;
-        $article->user_id = $article->user->name;
+        $article = Article::with('user', 'category')
+            ->findOrFail($id);
 
-        return $article;
+
+        return response()->json($article);;
     }
 
     /**
@@ -55,7 +56,8 @@ class ArticleController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $article = Article::findOrFail($id);
+        $article = Article::with('user', 'category')
+            ->findOrFail($id);
         $article->update($request->all());
 
         return $article;
@@ -69,9 +71,30 @@ class ArticleController extends Controller
      */
     public function destroy($id)
     {
-        $article = Article::findOrFile($id);
+        $article = Article::find($id);
         $article->delete();
 
         return '';
+    }
+
+    /**
+     * @param $id
+     * @param $user_id
+     */
+    public function addRate($id, $user_id)
+    {
+        $article = Article::findOrFail($id);
+        $arr_rate = json_decode($article->rating, true);
+        foreach ($arr_rate as $value) {
+            if (array_key_exists($user_id, $value)) {
+
+                return 'уже';
+            }
+            $arr_rate[] = [$user_id => '1'];
+        }
+        $article->rating = json_encode($arr_rate);
+        $article->save();
+
+        return 'голос учтен';
     }
 }

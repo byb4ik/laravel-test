@@ -12,6 +12,7 @@
     "devDependencies": {
         "axios": "^0.21",
         "bootstrap": "^4.0.0",
+        "file-loader": "^6.2.0",
         "jquery": "^3.2",
         "laravel-elixir-vue-2": "^0.3.0",
         "laravel-mix": "^6.0.6",
@@ -27,6 +28,9 @@
         "vue-template-compiler": "^2.6.10"
     },
     "dependencies": {
+        "js-yaml": "^3.14.1",
+        "mime": "^2.5.2",
+        "vue-dynamic-dropdown": "^1.0.12",
         "watch": "^1.0.2"
     }
 }

@@ -16,15 +16,17 @@
                         <th>Краткое описание</th>
                         <th>Пользователь</th>
                         <th>Категория</th>
-                        <th width="100">&nbsp;</th>
+                        <th>Рейтинг</th>
+                        <th width="300">&nbsp;</th>
                     </tr>
                     </thead>
                     <tbody>
                     <tr v-for="article, index in articles">
                         <td>{{ article.title }}</td>
                         <td>{{ article.short_article }}</td>
-                        <td>{{ article.user_id }}</td>
-                        <td>{{ article.category_id }}</td>
+                        <td>{{ article.user.name }}</td>
+                        <td>{{ article.category.name }}</td>
+                        <td>{{ JSON.parse(article.rating).length }}</td>
 
                         <td>
                             <router-link :to="{name: 'articleEdit', params: {id: article.id}}"
@@ -50,6 +52,7 @@
 </template>
 
 <script>
+
 export default {
     data: function () {
         return {
@@ -80,6 +83,6 @@ export default {
                     });
             }
         }
-    }
+    },
 }
 </script>
