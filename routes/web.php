@@ -28,3 +28,4 @@ Route::resource('/article', 'App\Http\Controllers\ArticleController');
 Route::resource('/comment', 'App\Http\Controllers\CommentController');
 
 Route::get('/article/{id}/{user_id}', 'App\Http\Controllers\ArticleController@addRate');
+Route::get('/articles-by-category/{id}', 'App\Http\Controllers\ArticleController@articlesByCategory');

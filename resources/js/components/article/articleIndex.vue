@@ -1,51 +1,42 @@
 <template>
-    <div class="row">
+    <div class="container">
         <div class="form-group">
-            <router-link :to="{name: 'articleCreate'}" class="btn btn-success btn-sm">
-                Добавить новое сообщение
-            </router-link>
+            <router-link to="/">Назад</router-link>
         </div>
 
         <div class="panel panel-default">
-            <div class="panel-heading">Список сообщений</div>
+            <div class="panel-heading">Список категорий</div>
             <div class="panel-body">
-                <table class="table table-bordered table-striped">
-                    <thead>
-                    <tr>
-                        <th>Заголовок</th>
-                        <th>Краткое описание</th>
-                        <th>Пользователь</th>
-                        <th>Категория</th>
-                        <th>Рейтинг</th>
-                        <th width="300">&nbsp;</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    <tr v-for="article, index in articles">
-                        <td>{{ article.title }}</td>
-                        <td>{{ article.short_article }}</td>
-                        <td>{{ article.user.name }}</td>
-                        <td>{{ article.category.name }}</td>
-                        <td>{{ JSON.parse(article.rating).length }}</td>
 
-                        <td>
-                            <router-link :to="{name: 'articleEdit', params: {id: article.id}}"
-                                         class="btn btn-xs btn-warning btn-sm">
-                                Редактировать
-                            </router-link>
-                            <router-link :to="{name: 'articleView', params: {id: article.id}}"
-                                         class="btn btn-xs btn-info btn-sm">
-                                Просмотр
-                            </router-link>
-                            <a href="#"
-                               class="btn btn-xs btn-danger btn-sm"
-                               v-on:click="deleteEntry(article.id, index)">
-                                Удалить
-                            </a>
-                        </td>
-                    </tr>
-                    </tbody>
-                </table>
+
+                <tr v-for="article, index in articles">
+                    <h3>
+                        <router-link :to="{name: 'categoryView', params: {id: article.category_id}}">
+                            <a>{{ article.category.name }} </a>
+                        </router-link>
+                        >> {{ article.title }}
+                    </h3>
+<!--                    <b>{{ article.user.name }} </b>-->
+<!--                    <p>{{ article.short_article }}-->
+<!--                        <router-link :to="{name: 'articleView', params: {id: article.id}}">-->
+<!--                            <a>Читать полностью</a>-->
+<!--                        </router-link>-->
+<!--                    </p>-->
+
+                    <!--                        <p>Проголосовало: {{ JSON.parse(article.rating).length }}</p>-->
+
+<!--                    <router-link :to="{name: 'articleEdit', params: {id: article.id}}"-->
+<!--                                 class="btn btn-xs btn-warning btn-sm">-->
+<!--                        Редактировать-->
+<!--                    </router-link>-->
+
+<!--                    <a href="#"-->
+<!--                       class="btn btn-xs btn-danger btn-sm"-->
+<!--                       v-on:click="deleteEntry(article.id, index)">-->
+<!--                        Удалить-->
+<!--                    </a>-->
+
+                </tr>
             </div>
         </div>
     </div>

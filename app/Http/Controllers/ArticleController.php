@@ -97,4 +97,10 @@ class ArticleController extends Controller
 
         return 'голос учтен';
     }
+
+    public function articlesByCategory($category)
+    {
+        return Article::with('user')->where('category_id', $category)->get();
+
+    }
 }

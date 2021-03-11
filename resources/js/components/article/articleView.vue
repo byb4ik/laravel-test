@@ -2,7 +2,7 @@
     <div class="panel panel-default">
 
         <div class="form-group">
-            <router-link to="/" class="btn btn-primary">Назад</router-link>
+            <router-link to="/">Назад</router-link>
         </div>
 
         <h2>{{ article.title }}</h2>
@@ -76,7 +76,4 @@ export default {
         }
     },
 }
-$http.get('api/user').then(response => {
-    console.log(response.body);
-})
 </script>
